@@ -1,0 +1,306 @@
+@font-face {
+    font-family: "Zombie";
+    src: url("fonts/zombie.otf");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    overflow: hidden;
+}
+
+#game-container {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: rgb(0, 0, 0);
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    background-position: center bottom;
+}
+
+#game-container:hover {
+    cursor: crosshair;
+}
+
+.zombie {
+    position: absolute;
+    z-index: 2;
+    right: -200px;
+    width: 200px;
+    height: 312px;
+    background: url("images/zombie.png");
+    transform: scale(0.7);
+    animation: walk 1s 0s infinite steps(9), walkFrom 14s 0s 1 linear;
+}
+
+.house {
+    position: absolute;
+    bottom: 160px;
+    left: -20px;
+    background: url("images/house.png");
+    background-position: center;
+    transform: scale(1.75);
+    height: 500px;
+    width: 300px;
+    z-index: 1;
+}
+
+.house-door {
+    position: absolute;
+    background: url("images/house.png");
+    background-position: left;
+    transform: scale(1.75);
+    height: 500px;
+    width: 210px;
+    z-index: 3;
+    bottom: 160px;
+    left: -60px;
+}
+
+.house::before {
+    content: "";
+    display: block;
+    height: 125px;
+    width: 35px;
+    position: absolute;
+    background: black;
+    right: 62.5px;
+    bottom: 50px;
+}
+
+.house-door::after {
+    content: "";
+    display: block;
+    height: 125px;
+    width: 30px;
+    position: absolute;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05));
+    right: -26px;
+    bottom: 50px;
+}
+
+#score {
+    position: absolute;
+    margin: 20px;
+    color: white;
+    font-family: "Zombie";
+    font-size: 60px;
+    z-index: 4;
+    text-shadow: 0 0 10px #000;
+    filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1);
+}
+
+#player {
+    position: absolute;
+    background: url("images/player.png");
+    max-width: 100%;
+    max-height: 100%;
+    width: 500px;
+    height: 400px;
+    bottom: 40px;
+    left: 300px;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center bottom;
+}
+
+.bullet {
+    position: absolute;
+    width: 15px;
+    height: 5px;
+    bottom: 144px;
+    left: 635px;
+    background-color: rgb(255, 206, 0);
+    z-index: 3;
+    box-shadow: 0 0 15px rgb(255, 206, 0);
+}
+
+.muzzle {
+	position: absolute;
+    background: url("images/muzzle.png");
+    max-width: 100%;
+    max-height: 100%;
+    width: 250px;
+    height: 250px;
+    bottom: 85px;
+    left: 570px;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center bottom;
+}
+
+@keyframes walk {
+    100% {
+        background-position-x: -1800px;
+    }
+}
+
+@keyframes walkFrom {
+    100% {
+        right: 100%;
+    }
+}
+
+#game-menu {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: rgb(0, 0, 0);
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-menu img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 400px;
+    height: 250px;
+}
+
+#game-menu button {
+    display: block;
+    margin: 10px auto;
+}
+
+#start-button {
+    width: 250px;
+    height: 100px;
+    font-family: "Zombie";
+    font-size: 60px;
+    border: none;
+    border-radius: 10px;
+    background-color: #63a759;
+    cursor: pointer;
+    transition-duration: 250ms;
+    transition-property: box-shadow, background-color;
+}
+
+#start-button:hover {
+    transition-duration: 250ms;
+    transition-property: box-shadow, background-color;
+    box-shadow: 0 0 20px #79CC6C;
+    background-color: #79CC6C;
+}
+
+#game-over {
+    display: none;
+    position: absolute;
+    top: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: "Zombie";
+    font-size: 40px;
+    z-index: 5;
+}
+
+#game-over h1 {
+    color: #c70000;
+    text-shadow: 0 0 10px #000;
+    filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1);
+}
+
+#game-over p {
+    color: #f9f9f9;
+    text-shadow: 0 0 10px #000;
+    filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1);
+}
+
+#game-over button {
+    width: 200px;
+    height: 50px;
+    font-family: "Zombie";
+    font-size: 25px;
+    border: none;
+    border-radius: 10px;
+    background-color: #63a759;
+    cursor: pointer;
+}
+
+#game-over button:hover {
+    background-color: #79CC6C;
+}
+
+#game-over button {
+    display: block;
+    margin: 10px auto;
+}
+
+#damage {
+    background-color: red;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.active {
+    background-color: red;
+    animation: 0.4s damage-effect forwards;
+}
+
+@keyframes damage-effect {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#heart {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#heart a {
+    font-family: "Zombie";
+    font-size: 75px;
+    display: inline;
+    margin-right: 20px;
+    color: #c70000;
+    text-shadow: 0 0 10px #000;
+    filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1);
+    position: relative;
+    top: -10px;
+}
+
+#heart img {
+    width: 70px;
+    height: 70px;
+}
+
+#temperature {
+    position: absolute;
+    color: white;
+    font-family: "Zombie";
+    font-size: 45px;
+    z-index: 5;
+    text-shadow: 0 0 10px #000;
+    filter: progid:DXImageTransform.Microsoft.Glow(Color=#000,Strength=1);
+    left: 0;
+    bottom: 0;
+    margin: 8px;
+    opacity: 0.5;
+}
