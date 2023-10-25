@@ -1,24 +1,42 @@
 const gameContainer = document.getElementById("game-container");
 const score = document.getElementById("score");
-
 const gameMenu = document.getElementById("game-menu");
 const startButton = document.getElementById("start-button");
-
 const gameOver = document.getElementById("game-over");
 const playAgain = document.getElementById("play-again");
 const menu = document.getElementById("menu");
-
 const damage = document.getElementById("damage");
 
 let playerScore = 0;
 let heart = 3;
 let isGameStarted = false;
-
 const bullets = [];
 
 var trackAudio = new Audio("audios/track.mp3");
 var shotgunAudio = new Audio("audios/shotgun.mp3");
 var bloodAudio = new Audio("audios/blood.mp3");
+
+const apiKey = "88b9f61a9fff1753ad0c186774bbc601";
+
+async function getWeather() {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Baku&appid=${apiKey}&units=metric`);
+        const data = await response.json();
+        const temperature = data.main.temp;
+        document.getElementById("temperature").textContent = `${temperature} °C`;
+    }
+    
+    catch (error) {
+        console.log(error);
+    }
+}
+window.addEventListener("load", getWeather);
+
+function load() {
+    requestAnimationFrame(load);
+    trackAudio.play();
+}
+requestAnimationFrame(load);
 
 startButton.addEventListener("click", () => {
     isGameStarted = true;
@@ -183,25 +201,3 @@ function generateRandomFloatInRange(min, max) {
 function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
-
-const apiKey = "88b9f61a9fff1753ad0c186774bbc601";
-
-async function getWeather() {
-    try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Baku&appid=${apiKey}&units=metric`);
-        const data = await response.json();
-        const temperature = data.main.temp;
-        document.getElementById("temperature").textContent = `${temperature} °C`;
-    }
-    
-    catch (error) {
-        console.log(error);
-    }
-}
-window.addEventListener("load", getWeather);
-
-function load() {
-    requestAnimationFrame(load);
-    trackAudio.play();
-}
-requestAnimationFrame(load);
