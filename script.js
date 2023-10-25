@@ -202,6 +202,6 @@ window.addEventListener("load", getWeather);
 
 function load() {
     requestAnimationFrame(load);
-    //trackAudio.play();
+    trackAudio.play();
 }
 requestAnimationFrame(load);
